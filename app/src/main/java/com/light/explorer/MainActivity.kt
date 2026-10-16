@@ -304,7 +304,7 @@ class MainActivity : AppCompatActivity() {
     private fun dlgRarList(f: File) {
         thread {
             val names = try {
-                com.github.junrar.Junrar.getContents(f)?.map { it.fileNameString }?.take(500) ?: emptyList()
+                com.github.junrar.Junrar.getContentsDescription(f).map { it.path }.take(500)
             } catch (e: Exception) { listOf("ошибка: ${e.message}") }
             runOnUiThread {
                 AlertDialog.Builder(this)
@@ -313,7 +313,9 @@ class MainActivity : AppCompatActivity() {
                     .setPositiveButton("распаковать") { _, _ ->
                         thread {
                             try {
-                                com.github.junrar.Junrar.extract(f, File(cur, f.nameWithoutExtension))
+                                val dest = File(cur, f.nameWithoutExtension)
+                                dest.mkdirs()
+                                com.github.junrar.Junrar.extract(f, dest)
                                 runOnUiThread { load() }
                             } catch (e: Exception) { runOnUiThread { toast("ошибка распаковки rar") } }
                         }
