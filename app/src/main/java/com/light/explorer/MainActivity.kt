@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                     try {
                         Thread.sleep(300)
                         val res = FileOps.fastSearch(root, q)
-                        runOnUiThread { items = res; selected.clear(); adapter.notify(); updateCount() }
+                        runOnUiThread { items = res; selected.clear(); adapter.refresh(); updateCount() }
                     } catch (_: InterruptedException) {}
                 }
             }
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() { super.onResume(); load() }
     override fun onBackPressed() {
         if (b.etSearch.text.isNotEmpty()) { b.etSearch.setText(""); return }
-        if (selected.isNotEmpty()) { selected.clear(); adapter.notify(); updateCount(); return }
+        if (selected.isNotEmpty()) { selected.clear(); adapter.refresh(); updateCount(); return }
         if (!up()) super.onBackPressed()
     }
 
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                 if (b.etSearch.text.isEmpty()) { items = list }
                 selected.clear()
                 b.tvPath.text = cur.absolutePath.lowercase()
-                adapter.notify()
+                adapter.refresh()
                 updateCount()
             }
         }
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
     private fun selectAll() {
         if (selected.size == items.size) selected.clear()
         else { selected.clear(); items.forEach { selected.add(it.absolutePath) } }
-        adapter.notify(); updateCount()
+        adapter.refresh(); updateCount()
     }
 
     private fun buildBottom() {
@@ -340,7 +340,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class FileAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<VH>() {
-        fun notify() { notifyDataSetChanged() }
+        fun refresh() { notifyDataSetChanged() }
         override fun getItemCount() = items.size
         override fun onCreateViewHolder(p: ViewGroup, v: Int): VH {
             val vw = LayoutInflater.from(p.context).inflate(R.layout.item_file, p, false)
