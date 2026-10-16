@@ -1,0 +1,2 @@
+-keep class com.github.junrar.** { *; }
+-dontwarn com.github.junrar.**

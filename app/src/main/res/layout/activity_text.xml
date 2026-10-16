@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/red"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:orientation="horizontal">
+        <TextView android:id="@+id/tvTitle"
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white" android:textSize="14sp"
+            android:fontFamily="sans-serif" android:singleLine="true" />
+        <Button android:id="@+id/btnPrev" android:layout_width="wrap_content" android:layout_height="36dp"
+            android:text="назад" android:textSize="12sp" android:textColor="@color/white"
+            android:background="@android:color/transparent" />
+        <Button android:id="@+id/btnNext" android:layout_width="wrap_content" android:layout_height="36dp"
+            android:text="далее" android:textSize="12sp" android:textColor="@color/white"
+            android:background="@android:color/transparent" />
+        <Button android:id="@+id/btnSave" android:layout_width="wrap_content" android:layout_height="36dp"
+            android:text="сохранить" android:textSize="12sp" android:textColor="@color/white"
+            android:background="@android:color/transparent" android:visibility="gone" />
+    </LinearLayout>
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <EditText android:id="@+id/etContent"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@null"
+            android:textSize="13sp" android:fontFamily="monospace"
+            android:textColor="@color/ink"
+            android:padding="12dp" />
+    </ScrollView>
+
+    <TextView android:id="@+id/tvPage"
+        android:layout_width="match_parent" android:layout_height="32dp"
+        android:gravity="center" android:textSize="12sp"
+        android:textColor="@color/gray" android:fontFamily="sans-serif" />
+</LinearLayout>
